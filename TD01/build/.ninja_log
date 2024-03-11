@@ -1,0 +1,11 @@
+# ninja log v5
+27	54	0	C:/Users/Guilhem Poties/Documents/Etudes/IMAC/S2/prog_algo/TD01/build/CMakeFiles/cmake.verify_globs	ac6abcd47ddf7da5
+58	150	7306697642374176	CMakeFiles/main.dir/src/utils.cpp.obj	43a726768fb9df93
+47	689	7306697647771211	CMakeFiles/main.dir/src/main.cpp.obj	6aac2adfc9438c6e
+59	746	7306690717812658	CMakeFiles/main.dir/src/fraction.cpp.obj	6e084a7081761ae9
+754	895	7306690719255333	C:/Users/Guilhem Poties/Documents/Etudes/IMAC/S2/prog_algo/TD01/bin/Debug/main.exe	d11c5880a6c41763
+21	46	0	C:/Users/Guilhem Poties/Documents/Etudes/IMAC/S2/prog_algo/TD01/build/CMakeFiles/cmake.verify_globs	ac6abcd47ddf7da5
+61	261	7312743971210492	CMakeFiles/main.dir/src/utils.cpp.obj	43a726768fb9df93
+56	775	7312743976328854	CMakeFiles/main.dir/src/fraction.cpp.obj	6e084a7081761ae9
+50	776	7312743976340206	CMakeFiles/main.dir/src/main.cpp.obj	6aac2adfc9438c6e
+777	1283	7312743981311269	C:/Users/Guilhem Poties/Documents/Etudes/IMAC/S2/prog_algo/TD01/bin/Debug/main.exe	d11c5880a6c41763
