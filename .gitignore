@@ -1,6 +1,7 @@
 #Compiler
 **/.vscode
 **/build
+**/bin
 
 # Prerequisites
 *.d
