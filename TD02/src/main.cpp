@@ -4,7 +4,14 @@ bool is_sorted(std::vector<int> const& vec) { return std::is_sorted(vec.begin(),
 
 int main() {
     std::vector<int> array {6, 2, 8, 1, 5, 3, 9};
-    bubble_sort(array);
+    
+    quick_sort(array);
+
+    for (int i : array)
+    {
+        std::cout << i << std::endl;
+    }
+    
 
     if (is_sorted(array)) {
         std::cout << "Le tableau est trié" << std::endl;
