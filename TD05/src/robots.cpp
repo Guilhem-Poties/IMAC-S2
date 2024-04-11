@@ -26,4 +26,18 @@ std::vector<std::pair<std::string, float>> get_robots_fix(size_t size) {
     return robots_fix;
 }
 
-std::unordered_map<std::string, std::vector<float>> robots_fixes_map(std::vector<std::pair<std::string, float>> const& robots_fixes);
+std::unordered_map<std::string, std::vector<float>> robots_fixes_map(std::vector<std::pair<std::string, float>> const& robots_fixes) {
+    std::unordered_map<std::string, std::vector<float>> fixes_map {};
+    for (auto & fix : robots_fixes) {
+        auto robotName {fixes_map.find(fix.first)};
+        //if (robotName != fixes_map.end()) 
+        fixes_map[fix.first].push_back(fix.second);
+    }
+    return fixes_map;
+}
+
+float float_sum(std::vector<float> vec) {
+    float sum {};
+    for (auto & flt : vec) sum+=flt;
+    return sum;    
+}

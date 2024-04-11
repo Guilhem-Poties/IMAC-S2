@@ -1,10 +1,12 @@
 #include "hachage.hpp"
+#include "robots.hpp"
 
 int main() {
-    std::string str {"Il etait une fois"};
-    size_t max {9999};
 
     /************ EXERCICE 1 ************/
+
+    std::string str {"Il etait une fois"};
+    size_t max {9999};
 
     /* 1 */
     std::cout << "hachage 1 : " << folding_string_hash(str, max) << std::endl;
@@ -18,5 +20,24 @@ int main() {
     
     
     /************ EXERCICE 2 ************/
+    
     /* 1 */
+    std::cout << "Reparations par robot : " << std::endl;
+    for (auto & robot : robots_fixes_map(get_robots_fix(5))) {
+        std::cout << robot.first << " : \n";
+        for (auto & fix : robot.second) {
+            std::cout << " - " << fix << std::endl;
+        }
+    }
+    std::cout << std::endl;
+
+    /* 2 */
+    std::cout << "Somme de float : " << float_sum({2.1, 3.2, 8.5}) << std::endl;
+
+    /* 3 */
+    std::cout << "Somme des réparations par robot : " << std::endl;
+    for (auto & robot : robots_fixes_map(get_robots_fix(100))) {
+        std::cout << robot.first << " : " << float_sum(robot.second) << std::endl;
+    }
+    std::cout << std::endl;
 }
