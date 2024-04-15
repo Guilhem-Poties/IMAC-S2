@@ -50,11 +50,11 @@ std::vector<std::string> split_string(std::string const& s) {
 
 bool is_floating(std::string const& s) {
     for (size_t i=0; i < s.size(); i++) {
-        if (isdigit(s.at(i)) || s.at(i) == '.') {
-            return true;
+        if (!(isdigit(s.at(i)) || s.at(i) == '.')) {
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 float operation(std::string op, float leftOperand, float rightOperand) {
