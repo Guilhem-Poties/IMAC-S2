@@ -31,16 +31,26 @@ std::vector<Token> tokenize(std::vector<std::string> const& words);
 float npi_evaluate(std::vector<Token> const& tokens);
 
 
+size_t operator_precedence(Operator const op);
+
+std::vector<Token> infix_to_npi_tokens(std::string const& expression);
+
+void infix_evaluate(std::string infix_expression);
+
+
 int main() {
     std::string npi {};
     // std::getline(std::cin, npi);
 
     std::cout << npi_evaluate(tokenize(split_string("3 4 2 ^ 1 5 - 6 ^ / +"))) << std::endl;
 
+    infix_evaluate("3 + 4 ^ 2 / ( 1 - 5 ) ^ 6");
+
     return 0;
 }
 
 
+/************ Exercice 1 ************/
 
 std::vector<std::string> split_string(std::string const& s) {
     std::istringstream in(s); // transforme une chaîne en flux de caractères, cela simule un flux comme l'est std::cin
@@ -91,6 +101,8 @@ float npi_evaluate(std::vector<std::string> const& tokens) {
     return values.top();
 }
 
+
+/************ Exercice 2 ************/
 
 Token makeToken(float value) {
     return {TokenType::OPERAND, value, Operator::NONE};
@@ -158,4 +170,64 @@ float npi_evaluate(std::vector<Token> const& tokens) {
         }
     }
     return values.top();    
+}
+
+
+/************ Exercice 3 ************/
+
+size_t operator_precedence(Operator const op) {
+    size_t result {0};
+    if (op == Operator::ADD || op == Operator::SUB) result+=1;
+    else if (op == Operator::MUL || op == Operator::DIV) result+=2;
+    else if (op == Operator::POW) result+=3;
+
+    return result;
+}
+
+std::vector<Token> infix_to_npi_tokens(std::string const& expression) {
+    std::vector<Token> result {};
+    std::stack<Token> stack_operators {};
+
+    for (auto & token : tokenize(split_string(expression))) {
+        // Si le token est un operateur
+        if (token.type == TokenType::OPERATOR) {
+            if (!stack_operators.empty()) {
+                // Cas séparé d'une parenthèse fermente
+                if (token.op == Operator::CLOSE_PAREN) {
+                    while (stack_operators.top().op != Operator::OPEN_PAREN) {
+                        result.push_back(stack_operators.top());
+                        stack_operators.pop();
+                    }
+                    stack_operators.pop();
+                }
+                else if (token.op == Operator::OPEN_PAREN) {
+                    stack_operators.push(token);
+                }
+                // Cas classique
+                else {
+                    while (operator_precedence(stack_operators.top().op) >= operator_precedence(token.op)) {
+                        result.push_back(stack_operators.top());
+                        stack_operators.pop();
+                    }
+                    stack_operators.push(token);
+                }
+            }
+            else {
+                stack_operators.push(token);
+            }
+        } 
+        // Si le token est une opérande
+        else {
+            result.push_back(token);
+        }
+    }
+    while (!stack_operators.empty()) {
+        result.push_back(stack_operators.top());
+        stack_operators.pop();
+    }
+    return result;
+}
+
+void infix_evaluate(std::string infix_expression) {
+    std::cout << "Le resultat de l'expression vaut : " << npi_evaluate(infix_to_npi_tokens(infix_expression));
 }
