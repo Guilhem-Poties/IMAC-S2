@@ -8,55 +8,63 @@ int sizeWord(std::string const& word);
 
 std::vector<std::string> split_string(std::string const& str);
 
+bool is_palindrome(std::string str);
+
 int main() {
 
     /************ EXERCICE 1 ************/
 
-    /* 1 */
-    std::vector<int> vec {};
-    for (int _ = 0; _ < 99; _++) {
-        vec.push_back(rand() % 100);
-    }
+    // /* 1 */
+    // std::vector<int> vec {};
+    // for (int _ = 0; _ < 99; _++) {
+    //     vec.push_back(rand() % 100);
+    // }
 
-    std::vector<int>::iterator begin {vec.begin()};
-    std::vector<int>::iterator end {vec.end()};
+    // std::vector<int>::iterator begin {vec.begin()};
+    // std::vector<int>::iterator end {vec.end()};
 
-    /* 5 */
-    std::sort(begin, end);
+    // /* 5 */
+    // std::sort(begin, end);
 
-    /* 2 */
-    for (std::vector<int>::iterator it = begin; it < end; ++it) {
-        std::cout << *it << ", ";
-    }
-    std::cout << std::endl;
+    // /* 2 */
+    // for (std::vector<int>::iterator it = begin; it < end; ++it) {
+    //     std::cout << *it << ", ";
+    // }
+    // std::cout << std::endl;
 
-    /* 3 */
-    std::cout << "Entrez une valeur : ";
-    int value {}; 
-    std::cin >> value;
-    std::cout << std::endl;
+    // /* 3 */
+    // std::cout << "Entrez une valeur : ";
+    // int value {}; 
+    // std::cin >> value;
+    // std::cout << std::endl;
 
-    if (end != std::find(begin, end, value)) {
-        std::cout << value << " est dans le tableau" << std::endl;
-    }
-    else {
-        std::cout << value << " n'est pas dans le tableau" << std::endl;
-    }
+    // if (end != std::find(begin, end, value)) {
+    //     std::cout << value << " est dans le tableau" << std::endl;
+    // }
+    // else {
+    //     std::cout << value << " n'est pas dans le tableau" << std::endl;
+    // }
     
-    /* 4 */
-    std::cout << value << " apparait " << std::count(begin, end, value) << " fois dans le tableau";
+    // /* 4 */
+    // std::cout << value << " apparait " << std::count(begin, end, value) << " fois dans le tableau";
 
-    /* 6 */
-    std::cout << "La somme du tableau vaut " << std::accumulate(begin, end, 0) << std::endl;
+    // /* 6 */
+    // std::cout << "La somme du tableau vaut " << std::accumulate(begin, end, 0) << std::endl;
     
     
+    // /************ EXERCICE 2 ************/
+
+    // /* 1 */
+    // std::cout << sizeWord("Il etait une fois") << std::endl;
+    
+    // /* 2 */
+    // for (std::string str : split_string("Il etait une fois")) std::cout << str << std::endl;
+
+
     /************ EXERCICE 2 ************/
 
-    /* 1 */
-
-    std::cout << sizeWord("Il etait une fois") << std::endl;
-
-    for (std::string str : split_string("Il etait une fois")) std::cout << str << std::endl;
+    if (is_palindrome("ABBA")) std::cout << "C'est un palindrome";
+    else std::cout << "Ce n'est pas un palindrome";
     
     return 0;
 }
@@ -89,4 +97,8 @@ std::vector<std::string> split_string(std::string const& str) {
         }
     }
     return tabStr;
+}
+
+bool is_palindrome(std::string str) {
+    return std::equal(str.begin(), str.end(), str.rbegin(), str.rend());
 }
