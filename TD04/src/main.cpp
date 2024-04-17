@@ -3,34 +3,41 @@
 #include <algorithm>
 #include <numeric>
 #include <string>
+#include <math.h>
 
 int sizeWord(std::string const& word);
 
 std::vector<std::string> split_string(std::string const& str);
 
+
 bool is_palindrome(std::string str);
+
+
+int square_sum(std::vector<int> vec);
+
+int even_product(std::vector<int> vec);
 
 int main() {
 
     /************ EXERCICE 1 ************/
 
-    // /* 1 */
-    // std::vector<int> vec {};
-    // for (int _ = 0; _ < 99; _++) {
-    //     vec.push_back(rand() % 100);
-    // }
+    /* 1 */
+    std::vector<int> vec {};
+    for (int _ = 0; _ < 99; _++) {
+        vec.push_back(rand() % 100);
+    }
 
-    // std::vector<int>::iterator begin {vec.begin()};
-    // std::vector<int>::iterator end {vec.end()};
+    std::vector<int>::iterator begin {vec.begin()};
+    std::vector<int>::iterator end {vec.end()};
 
-    // /* 5 */
-    // std::sort(begin, end);
+    /* 5 */
+    std::sort(begin, end);
 
-    // /* 2 */
-    // for (std::vector<int>::iterator it = begin; it < end; ++it) {
-    //     std::cout << *it << ", ";
-    // }
-    // std::cout << std::endl;
+    /* 2 */
+    for (std::vector<int>::iterator it = begin; it < end; ++it) {
+        std::cout << *it << ", ";
+    }
+    std::cout << std::endl;
 
     // /* 3 */
     // std::cout << "Entrez une valeur : ";
@@ -61,11 +68,18 @@ int main() {
     // for (std::string str : split_string("Il etait une fois")) std::cout << str << std::endl;
 
 
-    /************ EXERCICE 2 ************/
+    // /************ EXERCICE 3 ************/
 
-    if (is_palindrome("ABBA")) std::cout << "C'est un palindrome";
-    else std::cout << "Ce n'est pas un palindrome";
-    
+    // if (is_palindrome("ABBA")) std::cout << "C'est un palindrome";
+    // else std::cout << "Ce n'est pas un palindrome";
+
+
+    /************ EXERCICE 3 ************/
+
+
+    std::cout << "Somme des carrés : " << square_sum(vec) << std::endl;
+    std::cout << "Produit des pairs : " << even_product(vec) << std::endl;
+
     return 0;
 }
 
@@ -99,6 +113,18 @@ std::vector<std::string> split_string(std::string const& str) {
     return tabStr;
 }
 
+
+
 bool is_palindrome(std::string str) {
     return std::equal(str.begin(), str.end(), str.rbegin(), str.rend());
+}
+
+
+
+int square_sum(std::vector<int> vec) {
+    return std::accumulate(vec.begin(), vec.end(), 0, [](int sum, int element) {return sum + std::pow(element, 2);});
+}
+
+int even_product(std::vector<int> vec) {
+    return std::accumulate(vec.begin(), vec.end(), 0, [](int product, int element) {return (element%2==1 ? product*element : product);});
 }
