@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <algorithm>
+
 
 struct Node {
     int value;

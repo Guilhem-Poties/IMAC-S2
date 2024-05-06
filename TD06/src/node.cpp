@@ -6,7 +6,19 @@ bool Node::is_leaf() const {
 }
 
 void Node::insert(int value) {
-    value < this->value ? this->left = create_node(value) : this->right = create_node(value);
+    if (value < this->value) {
+        if (this->left) {
+            this->left->insert(value);
+        } else {
+            this->left = create_node(value);
+        }
+    } else {
+        if (this->right) {
+            this->right->insert(value);
+        } else {
+            this->right = create_node(value);
+        }
+    }
 }
 
 int Node::height() const {
@@ -41,6 +53,8 @@ void Node::display_infixe() const {
 std::vector<Node const*> Node::prefixe() const {
     std::vector<Node const*> nodes;
 
+    nodes.push_back(this);
+
     if (this->left){
         auto left_nodes {this->left->prefixe()};
         nodes.insert(nodes.end(), left_nodes.begin(), left_nodes.end());
@@ -50,8 +64,6 @@ std::vector<Node const*> Node::prefixe() const {
         auto right_nodes {this->right->prefixe()};
         nodes.insert(nodes.end(), right_nodes.begin(), right_nodes.end());
     }
-
-    nodes.push_back(this);
 
     return nodes;
 }
@@ -77,6 +89,7 @@ int Node::max() const {
 }
 
 
+
 // std::vector<Node const*> Node::postfixe() const {
 //     std::vector<Node const*> nodes {};
 //     std::stack<Node const*> to_process {};
@@ -88,31 +101,32 @@ int Node::max() const {
 
 //         // Si on est en train de descendre dans l'arbre
 //         if (previous == nullptr || (previous->left == current || previous->right == current)) {
-//             if() {
+//             if(nodes.end() == std::find(nodes.begin(), nodes.end(), current->left)) {
 //                 to_process.push(current->left);
 //             }
-//             else if(/* ? */) {
+//             else if(nodes.end() == std::find(nodes.begin(), nodes.end(), current->right)) {
 //                 to_process.push(current->right);
 //             } else {
+//                 to_process.pop();
 //                 nodes.push_back(current);
-//                 // on traite le nœud (ajouter au vecteur) et on le retire de la pile
-//                 // todo
 //             }
 
 //         // Si l'on remonte dans l'arbre en venant de la gauche
-//         }else if (previous == current->left) {
+//         }else if (previous->left == previous) {
 //             if(/* ? */) {
 //                 // todo
 //             } else {
-//                 // todo
+//                 to_process.pop();
+//                 nodes.push_back(current);
 //             }
 
 //         // Si l'on remonte dans l'arbre en venant de la droite
-//         } else if (previous == current->right) {
-//             // todo
+//         } else if (previous->right == previous) {
+//             to_process.pop();
+//             nodes.push_back(current);
 //         }
 
-//         previous = current;
+//         previous = (Node*)current;
 
 //     }
 //     return nodes;
@@ -169,8 +183,7 @@ bool remove(Node*& node, int value) {
             remove(most_left(node), most_left(node)->value);
             return true;
         }
-    }
-    else {
+    } else {
         if (node->left && node->right) return remove(node->left, value) || remove(node->right, value);
         else if (node->left) return remove(node->left, value);
         else if (node->right) return remove(node->right, value);

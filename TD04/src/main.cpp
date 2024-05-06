@@ -39,39 +39,39 @@ int main() {
     }
     std::cout << std::endl;
 
-    // /* 3 */
-    // std::cout << "Entrez une valeur : ";
-    // int value {}; 
-    // std::cin >> value;
-    // std::cout << std::endl;
+    /* 3 */
+    std::cout << "Entrez une valeur : ";
+    int value {}; 
+    std::cin >> value;
+    std::cout << std::endl;
 
-    // if (end != std::find(begin, end, value)) {
-    //     std::cout << value << " est dans le tableau" << std::endl;
-    // }
-    // else {
-    //     std::cout << value << " n'est pas dans le tableau" << std::endl;
-    // }
+    if (end != std::find(begin, end, value)) {
+        std::cout << value << " est dans le tableau" << std::endl;
+    }
+    else {
+        std::cout << value << " n'est pas dans le tableau" << std::endl;
+    }
     
-    // /* 4 */
-    // std::cout << value << " apparait " << std::count(begin, end, value) << " fois dans le tableau";
+    /* 4 */
+    std::cout << value << " apparait " << std::count(begin, end, value) << " fois dans le tableau";
 
-    // /* 6 */
-    // std::cout << "La somme du tableau vaut " << std::accumulate(begin, end, 0) << std::endl;
+    /* 6 */
+    std::cout << "La somme du tableau vaut " << std::accumulate(begin, end, 0) << std::endl;
     
     
-    // /************ EXERCICE 2 ************/
+    /************ EXERCICE 2 ************/
 
-    // /* 1 */
-    // std::cout << sizeWord("Il etait une fois") << std::endl;
+    /* 1 */
+    std::cout << sizeWord("Il etait une fois") << std::endl;
     
-    // /* 2 */
-    // for (std::string str : split_string("Il etait une fois")) std::cout << str << std::endl;
+    /* 2 */
+    for (std::string str : split_string("Il etait une fois")) std::cout << str << std::endl;
 
 
-    // /************ EXERCICE 3 ************/
+    /************ EXERCICE 3 ************/
 
-    // if (is_palindrome("ABBA")) std::cout << "C'est un palindrome";
-    // else std::cout << "Ce n'est pas un palindrome";
+    if (is_palindrome("ABBA")) std::cout << "C'est un palindrome";
+    else std::cout << "Ce n'est pas un palindrome";
 
 
     /************ EXERCICE 3 ************/
