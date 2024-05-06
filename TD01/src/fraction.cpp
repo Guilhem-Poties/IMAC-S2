@@ -52,7 +52,7 @@ bool operator>(Fraction const& f1, Fraction const& f2) {
 }
 
 bool operator>=(Fraction const& f1, Fraction const& f2) {
-    return !(f1 < f2 || f1 == f2);
+    return (f1 > f2 || f1 == f2);
 }
 
 Fraction::operator float() const {
