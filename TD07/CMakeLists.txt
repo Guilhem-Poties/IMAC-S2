@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 
+set(CMAKE_CXX_STANDARD 20)
+
 cmake_path(GET CMAKE_CURRENT_SOURCE_DIR FILENAME FolderName)   
 string(REPLACE " " "_" FolderName ${FolderName})
 

@@ -117,7 +117,7 @@ Operator findOpFromStr(std::string s) {
     else if (s == "-") result = Operator::SUB;
     else if (s == "*") result = Operator::MUL;
     else if (s == "/") result = Operator::DIV;
-    else if (s == "^") result = Operator::POW;    
+    else if (s == "^") result = Operator::POW;
     else if (s == "(") result = Operator::OPEN_PAREN;
     else if (s == ")") result = Operator::CLOSE_PAREN;
     else result = Operator::NONE;
