@@ -62,38 +62,38 @@ int main() {
 
     
     /************ Exercice 2 ************/
-    pretty_print_left_right(*root, "", false);
+
+    Node* root2 {create_node(1)};
+    
     /* 1 */
-    root->value = 5;
-    root->insert(3);
-    root->insert(7);
-    root->insert(2);
-    root->insert(4);
-    root->insert(6);
-    root->insert(8);
-    root->insert(1);
-    root->insert(9);
-    root->insert(0);
+    root2->value = 5;
+    root2->insert(3);
+    root2->insert(7);
+    root2->insert(2);
+    root2->insert(4);
+    root2->insert(6);
+    root2->insert(8);
+    root2->insert(1);
+    root2->insert(9);
+    root2->insert(0);
 
     /* 2 */
-    root->display_infixe();
+    root2->display_infixe();
     endLine();
 
     /* 3 */
-    std:: cout << "Min value of the tree : " << root->min() << std::endl;
-    std:: cout << "Max value of the tree : " << root->max() << std::endl;
+    std:: cout << "Min value of the tree : " << root2->min() << std::endl;
+    std:: cout << "Max value of the tree : " << root2->max() << std::endl;
 
     /* 4 */
-    // int sum {0};
-    // for (auto & root : root->postfixe()) {
-    //     sum += root->value;
-    // }
-    // std::cout << "Tree's value sum : " << sum << std::endl;
-    // endLine();
+    int sum {0};
+    for (auto & node : root2->postfixe()) {
+        sum += node->value;
+    }
+    std::cout << "Tree's value sum : " << sum << std::endl;
 
     /* 5 */
-    std::cout << "root height : " << root->height() << std::endl;
-
+    std::cout << "root2 height : " << root2->height() << std::endl;
 
     return 0;
 }

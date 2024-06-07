@@ -37,9 +37,11 @@ int Node::height() const {
 void Node::delete_childs() {
     if (this->left) this->left->delete_childs();
     this->left = nullptr;
+    delete this->left;
 
     if (this->right) this->right->delete_childs();
     this->right = nullptr;
+    delete this->right;
 }
 
 void Node::display_infixe() const {
@@ -90,47 +92,47 @@ int Node::max() const {
 
 
 
-// std::vector<Node const*> Node::postfixe() const {
-//     std::vector<Node const*> nodes {};
-//     std::stack<Node const*> to_process {};
-//     Node* previous {nullptr};
-//     to_process.push(this);
+std::vector<Node const*> Node::postfixe() const {
+    std::vector<Node const*> nodes {};
+    std::stack<Node const*> to_process {};
+    Node* previous {nullptr};
+    to_process.push(this);
 
-//     while (!to_process.empty()) {
-//         Node const* current { to_process.top() };
+    while (!to_process.empty()) {
+        Node const* current { to_process.top() };
 
-//         // Si on est en train de descendre dans l'arbre
-//         if (previous == nullptr || (previous->left == current || previous->right == current)) {
-//             if(nodes.end() == std::find(nodes.begin(), nodes.end(), current->left)) {
-//                 to_process.push(current->left);
-//             }
-//             else if(nodes.end() == std::find(nodes.begin(), nodes.end(), current->right)) {
-//                 to_process.push(current->right);
-//             } else {
-//                 to_process.pop();
-//                 nodes.push_back(current);
-//             }
+        // Si on est en train de descendre dans l'arbre
+        if (previous == nullptr || (previous->left == current || previous->right == current)) {
+            if(current->left) {
+                to_process.push(current->left);
+            }
+            else if(current->right) {
+                to_process.push(current->right);
+            } else {
+                to_process.pop();
+                nodes.push_back(current);
+            }
 
-//         // Si l'on remonte dans l'arbre en venant de la gauche
-//         }else if (previous->left == previous) {
-//             if(/* ? */) {
-//                 // todo
-//             } else {
-//                 to_process.pop();
-//                 nodes.push_back(current);
-//             }
+        // Si l'on remonte dans l'arbre en venant de la gauche
+        } else if (current->left == previous) {
+            if(current->right) {
+                to_process.push(current->right);
+            } else {
+                to_process.pop();
+                nodes.push_back(current);
+            }
 
-//         // Si l'on remonte dans l'arbre en venant de la droite
-//         } else if (previous->right == previous) {
-//             to_process.pop();
-//             nodes.push_back(current);
-//         }
+        // Si l'on remonte dans l'arbre en venant de la droite
+        } else if (current->right == previous) {
+            to_process.pop();
+            nodes.push_back(current);
+        }
 
-//         previous = (Node*)current;
+        previous = (Node*)current;
 
-//     }
-//     return nodes;
-// }
+    }
+    return nodes;
+}
 
 
 

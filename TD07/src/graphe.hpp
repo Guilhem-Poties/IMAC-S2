@@ -1,6 +1,8 @@
 #include <vector>
 #include <unordered_map>
 #include <utility>
+#include <stack>
+#include <algorithm>
 #include <iostream>
 
 namespace Graph {
@@ -33,7 +35,7 @@ namespace Graph {
         void print_BFS(int const start) const;
     };
 
-    WeightedGraph build_from_adjacency_matrix(std::vector<std::vector<int>> const& adjacency_matrix);
+    WeightedGraph build_from_adjacency_matrix(std::vector<std::vector<float>> const& adjacency_matrix);
 
 } // namespace
 
