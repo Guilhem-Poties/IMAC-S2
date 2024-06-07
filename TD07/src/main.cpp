@@ -20,5 +20,10 @@ int main() {
     graph.print_DFS(0);
     graph.print_BFS(0);
 
+    
+    /************ Exercice 3 ************/
+    dijkstra(graph, 0, 2);
+
+
     return 0;
 }

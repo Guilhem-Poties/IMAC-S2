@@ -4,6 +4,7 @@
 #include <stack>
 #include <algorithm>
 #include <iostream>
+#include <queue>
 
 namespace Graph {
     struct WeightedGraphEdge {
@@ -39,3 +40,4 @@ namespace Graph {
 
 } // namespace
 
+std::unordered_map<int, std::pair<float, int>> dijkstra(Graph::WeightedGraph const& graph, int const& start, int const end);
