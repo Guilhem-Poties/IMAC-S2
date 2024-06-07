@@ -22,8 +22,13 @@ int main() {
 
     
     /************ Exercice 3 ************/
-    dijkstra(graph, 0, 2);
-
+    std::unordered_map<int, std::pair<float, int>> distances = Graph::dijkstra(graph, 0, 2);
+    
+    for (auto && edge : distances) {
+        std::cout << edge.first << " : " << edge.second.first << " - " << edge.second.first;
+        endLine();
+    }
+    
 
     return 0;
 }

@@ -78,7 +78,7 @@ Graph::WeightedGraph Graph::build_from_adjacency_matrix(std::vector<std::vector<
     return graph;
 }
 
-std::unordered_map<int, std::pair<float, int>> dijkstra(Graph::WeightedGraph const& graph, int const& start, int const end) {
+std::unordered_map<int, std::pair<float, int>> Graph::dijkstra(Graph::WeightedGraph const& graph, int const& start, int const end) {
     // On crée un tableau associatif pour stocker les distances les plus courtes connues pour aller du sommet de départ à chaque sommet visité
     // La clé est l'identifiant du sommet et la valeur est un pair (distance, sommet précédent)
     std::unordered_map<int, std::pair<float, int>> distances {};
@@ -96,6 +96,7 @@ std::unordered_map<int, std::pair<float, int>> dijkstra(Graph::WeightedGraph con
     while (!to_visit.empty()) {
         // 2. On récupère le sommet le plus proche du sommet de départ dans la liste de priorité to_visit
         std::pair<float, int> closest_edge = to_visit.top();
+        to_visit.pop();
 
         // 3.Si on atteins le point d'arrivé, on s'arrête
         if (closest_edge.second == end) {
@@ -105,20 +106,21 @@ std::unordered_map<int, std::pair<float, int>> dijkstra(Graph::WeightedGraph con
         for (auto & edge : graph.adjacency_list.at(closest_edge.second)) {
             // 4. on regarde si le nœud existe dans le tableau associatif (si oui il a déjà été visité)
 
-            auto find_node {distances.find(end)};
+            auto find_node {distances.find(edge.to)};
             bool const visited {find_node != distances.end()};
 
              if (!visited) {
                     // 5. Si le nœud n'a pas été visité, on l'ajoute au tableau associatif en calculant la distance pour aller jusqu'à ce nœud
                     // la distance actuelle + le point de l'arrête)
-                distances.at(edge.to) = {distances.at(closest_edge.second).first + closest_edge.first, closest_edge.second};
-
+                to_visit.push(std::make_pair(edge.weight + closest_edge.first, edge.to));
+                distances.insert(std::make_pair(edge.to, std::make_pair(edge.weight + closest_edge.first, closest_edge.second)));
                     // 6. On ajout également le nœud de destination à la liste des nœud à visité (avec la distance également pour prioriser les nœuds les plus proches)
             } else {
                 // 7. Si il a déjà été visité, On test si la distance dans le tableau associatif est plus grande
                 // Si c'est le cas on à trouvé un plus court chemin, on met à jour le tableau associatif et on ajoute de nouveau le sommet de destination dans la liste à visité
-                if (distances.at(edge.to).first > distances.at(closest_edge.second).first + closest_edge.first) {
-                    distances.at(edge.to) = {distances.at(closest_edge.second).first + closest_edge.first, closest_edge.second};                   
+                if (distances.at(edge.to).first > edge.weight + closest_edge.first) {
+                    to_visit.push(std::make_pair(edge.weight + closest_edge.first, edge.to));
+                    distances.at(edge.to) = {edge.weight + closest_edge.first, closest_edge.second};                   
                 }
             } 
         }
